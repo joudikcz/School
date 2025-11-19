@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -Wno-unused-result -Wdangling-pointer=1 -Werror=uninitialized -Werror=return-type -Werror=vla
+CXXFLAGS = -Wall -Wextra -Wno-unused-result -Wdangling-pointer=1 -Werror=uninitialized -Werror=return-type -Werror=vla -O3
 
 # Target executable
 TARGET = app
