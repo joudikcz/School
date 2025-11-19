@@ -18,7 +18,7 @@
  */
 class Graph {
 private:
-    std::vector<std::vector<int>> adjacencyList;
+    std::vector<std::vector<int>> adjacencyList;    ///< Adjacency list representation of the graph
 
     int edge_count = 0;             ///< Total number of edges
     bool connected = true;          ///< Flag indicating if the graph is connected
