@@ -1,0 +1,73 @@
+/**
+ * @file graph.h
+ * @brief Header file for Graph class
+ * 
+ * Contains definition of Graph class (undirected graph).
+ */
+#pragma once
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include <exception>
+#include <queue>
+#include <climits>
+
+/**
+ * @brief Class represents an undirected graph with methods to find its center(s) and other statistics.
+ */
+class Graph {
+private:
+    std::vector<std::vector<int>> adjacencyList;
+
+    int edge_count = 0;             ///< Total number of edges
+    bool connected = true;          ///< Flag indicating if the graph is connected
+    int minimal_eccentricity = -1;  ///< Minimum eccentricity found in the graph
+
+    /**
+     * @brief Reads graph data from file and builds adjacency list
+     * @param filename Path to input file containing edge pairs
+     * @return Adjacency list 
+     */
+    std::vector<std::vector<int>> readIntegersFromFile(const std::string& filename);
+
+    /**
+     * @brief Calculates the maximal eccentricity of a vertex using BFS
+     * @param start Starting vertex index (Where should BFS start)
+     * @return Maximal eccentricity of the starting vertex
+     */
+    int bfsEccentricity(int start);
+
+
+public:
+
+    /**
+     * @brief Constructs graph from file data
+     * @param filename Input file containing vertex pairs (edges)
+     */
+    Graph(const std::string& filename) {
+        adjacencyList = readIntegersFromFile(filename);
+    }
+
+    /**
+     * @brief Finds graph center vertices
+     * @return Vector of vertices with minimum eccentricity (TLDR returns graph centers)
+     */
+    std::vector<int> getGraphCenters();
+
+    /**
+     * @brief Displays graph statistics
+     * 
+     * Outputs vertex count, edge count, connectivity status, 
+     * and center vertices with their eccentricity.
+     */
+    void printGraphStatistics();
+
+    /**
+     * @brief Outputs all vertices in the graph
+     * 
+     * Debug utility to display all vertices.
+     */
+    void printVertices() const;
+
+};

@@ -1,0 +1,50 @@
+# Doxyfile 1.9.8
+
+# Project related configuration options
+PROJECT_NAME           = "Graph Project"
+PROJECT_BRIEF          = 
+OUTPUT_DIRECTORY       = docs
+CREATE_SUBDIRS         = NO
+OUTPUT_LANGUAGE        = English
+
+# Build related configuration options
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_LOCAL_METHODS  = YES
+
+# Configuration options related to source browsing
+FULL_PATH_NAMES        = NO
+STRIP_FROM_PATH        = 
+
+# Configuration options related to warnings and progress messages
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+
+# Configuration options related to the input files
+INPUT                  = ./
+RECURSIVE              = NO
+FILE_PATTERNS          = *.cpp *.h
+
+# Configuration options related to source code parsing
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO
+SKIP_FUNCTION_MACROS   = YES
+
+# Configuration options related to the HTML output
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+
+# Configuration options related to the LaTeX output
+GENERATE_LATEX         = NO
+
+# Dot tool options (for diagrams)
+HAVE_DOT               = NO
+
+# Configuration options related to the diagrams
+CALL_GRAPH             = NO
+CALLER_GRAPH           = NO
