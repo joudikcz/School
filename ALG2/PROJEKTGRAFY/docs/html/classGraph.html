@@ -103,9 +103,9 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a15a5a8a4c510ffac2920656d31af8583" id="r_a15a5a8a4c510ffac2920656d31af8583"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraph.html#a15a5a8a4c510ffac2920656d31af8583">readIntegersFromFile</a> (const std::string &amp;filename)</td></tr>
 <tr class="memdesc:a15a5a8a4c510ffac2920656d31af8583"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads graph data from file and builds adjacency list.  <br /></td></tr>
 <tr class="separator:a15a5a8a4c510ffac2920656d31af8583"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae94cc7ad17e79cd8079fbb18a56ad7d9" id="r_ae94cc7ad17e79cd8079fbb18a56ad7d9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraph.html#ae94cc7ad17e79cd8079fbb18a56ad7d9">bfsEccentricity</a> (int start)</td></tr>
-<tr class="memdesc:ae94cc7ad17e79cd8079fbb18a56ad7d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the maximal eccentricity of a vertex using BFS.  <br /></td></tr>
-<tr class="separator:ae94cc7ad17e79cd8079fbb18a56ad7d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace8215c1396580c431a734edad3e212e" id="r_ace8215c1396580c431a734edad3e212e"><td class="memItemLeft" align="right" valign="top">std::pair&lt; int, std::vector&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraph.html#ace8215c1396580c431a734edad3e212e">bfsEccentricity</a> (int start)</td></tr>
+<tr class="memdesc:ace8215c1396580c431a734edad3e212e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the maximal eccentricity of and lower bound distance using BFS.  <br /></td></tr>
+<tr class="separator:ace8215c1396580c431a734edad3e212e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -160,8 +160,8 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae94cc7ad17e79cd8079fbb18a56ad7d9" name="ae94cc7ad17e79cd8079fbb18a56ad7d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae94cc7ad17e79cd8079fbb18a56ad7d9">&#9670;&#160;</a></span>bfsEccentricity()</h2>
+<a id="ace8215c1396580c431a734edad3e212e" name="ace8215c1396580c431a734edad3e212e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace8215c1396580c431a734edad3e212e">&#9670;&#160;</a></span>bfsEccentricity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,7 +170,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Graph::bfsEccentricity </td>
+          <td class="memname">std::pair&lt; int, std::vector&lt; int &gt; &gt; Graph::bfsEccentricity </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>start</em></td><td>)</td>
@@ -184,14 +184,14 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Calculates the maximal eccentricity of a vertex using BFS. </p>
+<p>Calculates the maximal eccentricity of and lower bound distance using BFS. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">start</td><td>Starting vertex index (Where should BFS start) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Maximal eccentricity of the starting vertex </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Pair containing maximal eccentricity and vector of lower bound distances </dd></dl>
 
 </div>
 </div>

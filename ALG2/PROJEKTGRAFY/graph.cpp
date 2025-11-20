@@ -66,14 +66,16 @@ void Graph::printGraphStatistics() {
 
 // Based on Levitin - Introduction to the Design and Analysis of Algorithms:    3.5 Depth-First Search and Breadth-First Search
 // Basically BFS implementation to find maximal eccentricity of a start vertex
-int Graph::bfsEccentricity(int start) {
+std::pair<int, std::vector<int>> Graph::bfsEccentricity(int start) {
 
     std::vector<bool> visited(adjacencyList.size(), false);
+    std::vector<int> lower_bound(adjacencyList.size(), -1);
     std::queue<int> queue;
     int max_eccentricity = 0;
     size_t visited_count = 0;
 
     visited[start] = true;
+    lower_bound[start] = 0;
     queue.push(start);
 
     while (!queue.empty()) {
@@ -89,6 +91,7 @@ int Graph::bfsEccentricity(int start) {
             for(auto neighbour : adjacencyList[current_vertex]){
                 if(!visited[neighbour]){
                     visited[neighbour] = true;
+                    lower_bound[neighbour] = lower_bound[current_vertex] + 1; // Update lower bound eccentricity estimation
                     visited_count++;
                     queue.push(neighbour);
                 }
@@ -98,6 +101,11 @@ int Graph::bfsEccentricity(int start) {
         
         if(!queue.empty()){
             max_eccentricity++;
+
+            // Return eariler because theres no need to continue if we already exceeded minimal eccentricity found so far
+            if(max_eccentricity > minimal_eccentricity){   
+                return {INT_MAX, lower_bound};
+            }
         }
     }
 
@@ -106,19 +114,32 @@ int Graph::bfsEccentricity(int start) {
         connected = false;
     }
 
-    return max_eccentricity;
+    return {max_eccentricity, lower_bound};
     
     
 }
 
 std::vector<int> Graph::getGraphCenters() {
     std::vector<int> centers;
+    std::vector<int> lower_bound_eccentricities(adjacencyList.size(), 0); // Lower bound eccentricities estimation
     minimal_eccentricity = INT_MAX;
 
     // For each vertex, calculate its eccentricity using BFS
     // Choose the minimal eccentricity vertices as centers
     for(size_t i = 0; i < adjacencyList.size(); i++) {
-        int eccentricity = bfsEccentricity(i);
+
+        // Skip if the lower bound estimation is already worse than the best found eccentricity
+        if (lower_bound_eccentricities[i] > minimal_eccentricity) continue;
+
+        auto [eccentricity, lower_bound] = bfsEccentricity(i);
+
+        // Update lower bound eccentricities estimation based on the last BFS run
+        for(size_t g = 0; g < lower_bound.size(); g++) {
+            if(lower_bound[g] > lower_bound_eccentricities[g]) {
+                lower_bound_eccentricities[g] = lower_bound[g];
+            }
+        }
+
         if(eccentricity < minimal_eccentricity) {
             minimal_eccentricity = eccentricity;
             centers.clear();

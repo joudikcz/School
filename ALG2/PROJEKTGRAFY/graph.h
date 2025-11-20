@@ -32,11 +32,11 @@ private:
     std::vector<std::vector<int>> readIntegersFromFile(const std::string& filename);
 
     /**
-     * @brief Calculates the maximal eccentricity of a vertex using BFS
+     * @brief Calculates the maximal eccentricity of and lower bound distance using BFS
      * @param start Starting vertex index (Where should BFS start)
-     * @return Maximal eccentricity of the starting vertex
+     * @return Pair containing maximal eccentricity and vector of lower bound distances
      */
-    int bfsEccentricity(int start);
+    std::pair<int, std::vector<int>> bfsEccentricity(int start);
 
 
 public:
