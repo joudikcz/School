@@ -38,6 +38,14 @@ private:
      */
     std::pair<int, std::vector<int>> bfsEccentricity(int start);
 
+    /**
+     * @brief Preprocess extreme vertices to refine lower bound eccentricities (TLDR Optimalization -> further info inside the fuction)
+     * @param centers Vector of current center vertices
+     * @param lower_bound_eccentricities Vector of lower bound eccentricities
+     * @param minimal_eccentricity Current minimal eccentricity
+     * @return Value of the v1 vertex
+     */
+    size_t preprocessExtremeVertices(std::vector<int>& centers, std::vector<int>& lower_bound_eccentricities, int& minimal_eccentricity);
 
 public:
 

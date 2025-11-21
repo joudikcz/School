@@ -124,10 +124,19 @@ std::vector<int> Graph::getGraphCenters() {
     std::vector<int> lower_bound_eccentricities(adjacencyList.size(), 0); // Lower bound eccentricities estimation
     minimal_eccentricity = INT_MAX;
 
+    // Preprocess extreme verticies
+    // v0->v1 most distant vertex (BFS mainly to find most distant vertex from v0 which is v1)
+    // v1->v2 most distant vertex (BFS mainly to refine lower bound eccentricities estimation)
+    // returns v1 so that we can skip in main loop
+    size_t v1 = preprocessExtremeVertices(centers, lower_bound_eccentricities, minimal_eccentricity);
+    
+
     // For each vertex, calculate its eccentricity using BFS
     // Choose the minimal eccentricity vertices as centers
-    for(size_t i = 0; i < adjacencyList.size(); i++) {
+    for(size_t i = 1; i < adjacencyList.size(); i++) {
 
+        if (i == v1) continue;
+        
         // Skip if the lower bound estimation is already worse than the best found eccentricity
         if (lower_bound_eccentricities[i] > minimal_eccentricity) continue;
 
@@ -152,3 +161,39 @@ std::vector<int> Graph::getGraphCenters() {
     return centers;
 }
 
+size_t Graph::preprocessExtremeVertices(std::vector<int>& centers, std::vector<int>& lower_bound_eccentricities, int& minimal_eccentricity){
+
+    // BFS on v0
+    auto [eccentricity_v0, lower_bound] = bfsEccentricity(0);
+    for(size_t g = 0; g < lower_bound.size(); g++) {
+        lower_bound_eccentricities[g] = lower_bound[g];
+    }
+    minimal_eccentricity = eccentricity_v0;
+    centers.push_back(0);
+
+    // v0->v1 most distatnt vertex from vertex 0
+    int v1 = 0;
+    for (size_t i = 0; i < lower_bound.size(); i++)
+    {
+        if(lower_bound[i] > lower_bound[v1]) {
+            v1 = i;
+        }
+    }
+    
+    //BFS on v1
+    auto [eccentricity_v1, lower_bound2] = bfsEccentricity(v1);
+    for(size_t g = 0; g < lower_bound.size(); g++) {
+        if(lower_bound2[g] > lower_bound_eccentricities[g]) {
+            lower_bound_eccentricities[g] = lower_bound2[g];
+        }
+    }
+    if(eccentricity_v1 < minimal_eccentricity) {
+        minimal_eccentricity = eccentricity_v1;
+        centers.clear();
+        centers.push_back(v1);
+    } else if(eccentricity_v1 == minimal_eccentricity) {
+        centers.push_back(v1);
+    }
+
+    return (size_t)v1;
+}
